@@ -1,53 +1,51 @@
-window.onload = function(){
+window.onload = function () {
+  var searchInput = ["Elmo", "Stich", "Elvis"];
+  renderButtons();
 
-  var searched = [];
+  function renderButtons() {
+    $("#gifs").empty();
 
-$("#button").on("click", function(){
-  event.preventDefault();
- var key = "WV7Oz1mmHYeSHVQuzqCkedMb1PC9SI2Y";
- var gif = $("#search").val().trim();
- var searchInput = [];
- searchInput.push(gif);
- var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + key +"&q=" + searchInput + "&limit=20";
- 
-  console.log(searchInput);
-  console.log("I was clicked " + queryURL)
-  $.ajax({ 
-    url: queryURL,
-    method: "GET"
-  }).then(function(results) { 
-    console.log(results);
-    for (var i = 0; i < results.length; i++){
+    for (var i = 0; i < searchInput.length; i++) {
+      var a = $("<button>");
+      a.addClass("gif");
+      a.attr("data-state", searchInput[i]);
+      a.text(searchInput[i]);
+      $("#gifs").append(a);
+    }
+  };
 
-      var gifDiv = $("<div>");
-      var gifImage = $("<img>");
+  function gifMe() {
+    var key = "WV7Oz1mmHYeSHVQuzqCkedMb1PC9SI2Y";
+    var gif = $("#search").val().trim();
+    searchInput.push(gif);
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=" + searchInput + "&limit=10";
 
-              gifImage.attr("src", results[i].url);
-              gifDiv.append(gifImage);
+    console.log(searchInput);
+    console.log("I was clicked " + queryURL)
 
-              $("#start").prepend(gifDiv);
-    };
-    
-  reset();
-});
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function (results) {
+      var gifs = results.data
+      console.log(gifs);
+      for (var i = 0; i < gifs.length; i++) {
+        var gifDiv = $("<div>");
+        var gifImage = $("<img>").attr("src", gifs[i].url);
 
-function reset(){
-  searchInput =[];
- };
+        gifDiv.append(gifImage);
+        $("#start").append(gifDiv);
+      };
+    });
+  };
 
- 
- function renderButtons() {
-     for (var i = 0; i < searched.length; i++) {
-         var a = $("<button>");
-         a.addClass("");
-         a.attr("data-state", searched[i]);
-         a.text(searched[i]);
-         $("#").append(a);
-     }
-   
-  
-  
-  
-}
-});
-}
+  $("#button").on("click", function (event) {
+    event.preventDefault();
+
+    gifMe();
+    renderButtons();
+  });
+
+
+
+};
