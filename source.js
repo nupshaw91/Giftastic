@@ -7,7 +7,7 @@ window.onload = function () {
 
     for (var i = 0; i < searchInput.length; i++) {
       var a = $("<button>");
-      a.addClass("gif", "btn btn-outline-secondary");
+      a.addClass("gif btn btn-outline-secondary font");
       a.attr("data-state", searchInput[i]);
       a.text(searchInput[i]);
       $("#gifs").append(a);

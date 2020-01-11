@@ -10,15 +10,16 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
+<body class="body">
   <div class="jumbotron">
     <h1 class="display-4">Hello, Gif Searcher</h1>
-    <p class="lead">This is a site that allows you to search for Gifs off your keyword(s). Enter what you would like to
+    <p class="lead font">This is a site that allows you to search for Gifs off your keyword(s). Enter what you would like to
       saerch for in the search box below. Then hit Gif me and let the Gifs roll in.</p>
     <hr class="my-4">
-    <p>buttons below show previous searched Gifs</p>
+    <p class="font">buttons below show previous searched Gifs</p>
     <div class="col-sm-4 random" id="gifs">col-sm-4</div>
   </div>
   <div class="top"></div>
@@ -27,10 +28,10 @@
       <div class="col-sm-8">
         <form>
           <div class="form-group">
-            <label>What do you want gifs of?</label>
+            <label class="font">What do you want gifs of?</label>
             <input class="form-control" id="search" type="text" placeholder="Glorious Gifs">
-            <input id="button" class="btn btn-primary" type="submit" value="Gif Me" for="search">
-            <small class="form-text text-muted">Let's get some gifs</small>
+            <input id="button" class="btn btn-outline-secondary font" type="submit" value="Gif Me" for="search">
+            <small class=" font form-text text-muted">Let's get some gifs</small>
           </div>
 
         </form>
@@ -38,8 +39,6 @@
     </div>
     <div class="row">
       <div class="col-sm selection" id="start"></div>
-      <div class="col-sm first" id="gifs">col-sm</div>
-      <div class="col-sm second">col-sm</div>
     </div>
   </div>
   <div class="footer"></div>
