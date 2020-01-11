@@ -49,12 +49,11 @@ window.onload = function () {
       dataType: "JSON",
       crossDomain: "True"
     }).then(function (results) {
-      // debugger;
       var gifs = results.data
       console.log(gifs);
       for (var i = 0; i < gifs.length; i++) {
         var gifDiv = $("<div>");
-        var gifImage = $("<img>").attr("src", gifs[i].url);
+        var gifImage = $("<img>").attr("src", gifs[i].url,S);
 
         gifDiv.append(gifImage);
         $("#start").append(gifDiv);
