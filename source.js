@@ -7,7 +7,7 @@ window.onload = function () {
 
     for (var i = 0; i < searchInput.length; i++) {
       var a = $("<button>");
-      a.addClass("gif");
+      a.addClass("gif", "btn btn-outline-secondary");
       a.attr("data-state", searchInput[i]);
       a.text(searchInput[i]);
       $("#gifs").append(a);
@@ -25,7 +25,9 @@ window.onload = function () {
 
     $.ajax({
       url: queryURL,
-      method: "GET"
+      method: "GET",
+      dataType: "JSON",
+      crossDomain: "True"
     }).then(function (results) {
       var gifs = results.data
       console.log(gifs);
