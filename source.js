@@ -2,6 +2,23 @@ window.onload = function () {
   var searchInput = ["Elmo", "Stich", "Elvis"];
   renderButtons();
 
+  (function() {
+    var cors_api_host = 'cors-anywhere.herokuapp.com';
+    var cors_api_url = 'https://' + cors_api_host + '/';
+    var slice = [].slice;
+    var origin = window.location.protocol + '//' + window.location.host;
+    var open = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function() {
+        var args = slice.call(arguments);
+        var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+        if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
+            targetOrigin[1] !== cors_api_host) {
+            args[1] = cors_api_url + args[1];
+        }
+        return open.apply(this, args);
+    };
+})();
+
   function renderButtons() {
     $("#gifs").empty();
 
@@ -24,11 +41,15 @@ window.onload = function () {
     console.log("I was clicked " + queryURL)
 
     $.ajax({
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
       url: queryURL,
       method: "GET",
       dataType: "JSON",
       crossDomain: "True"
     }).then(function (results) {
+      // debugger;
       var gifs = results.data
       console.log(gifs);
       for (var i = 0; i < gifs.length; i++) {
@@ -37,6 +58,7 @@ window.onload = function () {
 
         gifDiv.append(gifImage);
         $("#start").append(gifDiv);
+
       };
     });
   };
