@@ -1,5 +1,5 @@
 .body {
-    background: url(images/photo-1492446190781-58ac4285911d.jpg);
+    background: url(./images/photo-1492446190781-58ac4285911d.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -20,4 +20,8 @@ h1 {
     color: whitesmoke;
     font-weight: normal;
     font-style: normal;
+}
+
+img {
+    margin-bottom: 10px;
 }
