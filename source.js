@@ -1,5 +1,6 @@
 window.onload = function () {
   var searchInput = ["Elmo", "Stitch", "Cat", "Dog"];
+
   console.log(searchInput)
   renderButtons();
 
@@ -22,7 +23,7 @@ window.onload = function () {
     var gif = $("#search").val().trim();
     searchInput.push(gif);
     for (var i = 0; i < searchInput.length; i++) {
-      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=" + searchInput[i] + "&limit=10";
+      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=" + gif + "&limit=10";
 
       $.ajax({
         url: queryURL,
@@ -32,8 +33,6 @@ window.onload = function () {
       }).then(function (results) {
 
         var gifs = results.data;
-
-        console.log("gifs", gifs);
 
         for (var i = 0; i < gifs.length; i++) {
           var gifDiv = $("<div>");
@@ -46,18 +45,17 @@ window.onload = function () {
     };
   };
 
-  $(".previous").on("click", function (event){
-    event.preventDefault();
-    Previous();
-  // console.log(searchInput)
-  function Previous(){
+  //   var previous =$(".previous").attr("data-id");
+
+  // console.log(previous)
+
+  function previousGif() {
     var key = "WV7Oz1mmHYeSHVQuzqCkedMb1PC9SI2Y";
-    
-console.log(previous)
+    var previous = $(this).attr("data-id");
+
     for (var i = 0; i < searchInput.length; i++) {
       var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=" + previous + "&limit=10";
-      console.log(searchInput[i])
-      
+
       $.ajax({
         url: queryURL,
         method: "GET",
@@ -66,7 +64,6 @@ console.log(previous)
       }).then(function (results) {
 
         var gifs = results.data;
-
 
         for (var i = 0; i < gifs.length; i++) {
           var gifDiv = $("<div>");
@@ -79,8 +76,15 @@ console.log(previous)
     };
 
   };
-  
+
+  $(".previous").on("click", function (event) {
+    event.preventDefault();
+
+    previousGif();
   });
+
+  $(document).on("click", ".previous", previousGif);
+
   $("#button").on("click", function (event) {
     event.preventDefault();
 
@@ -88,6 +92,6 @@ console.log(previous)
     renderButtons();
   });
 
-
-
 };
+
+
